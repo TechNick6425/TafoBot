@@ -46,7 +46,7 @@ public class MongoDBManager {
 		for (Document d: documents) {
 			matches.add(new Match(Character.getById(d.getInteger("player1")), Character.getById(d.getInteger("player2")), Stage.getById(d.getInteger("stage")), d.getBoolean("winner")));
 		}
-
+		
 		return matches;
 	}
 }
