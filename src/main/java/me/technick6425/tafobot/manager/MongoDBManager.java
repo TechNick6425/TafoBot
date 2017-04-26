@@ -46,7 +46,7 @@ public class MongoDBManager {
 		ArrayList<Match> matches = new ArrayList<>();
 
 		for (Document d: documents) {
-			matches.add(new Match(Character.getById(d.getInteger("player1")), Character.getById(d.getInteger("player2")), Stage.getById(d.getInteger("stage")), (d.getString("winner") == "p1" ? true : false)));
+			matches.add(new Match(Character.getById(d.getInteger("player1")), Character.getById(d.getInteger("player2")), Stage.getById(d.getInteger("stage")), (d.getString("winner").equals("p1"))));
 		}
 
 		return matches;

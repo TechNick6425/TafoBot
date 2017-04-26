@@ -5,6 +5,7 @@ import me.technick6425.tafobot.data.Character;
 import me.technick6425.tafobot.data.Match;
 import me.technick6425.tafobot.data.Stage;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 
 import java.awt.*;
@@ -18,6 +19,8 @@ public class CommandReport extends Command {
 
 	@Override
 	public void execute(Message message, String... args) {
+		checkUserPermission(message, Permission.MESSAGE_MANAGE);
+
 		if(args.length != 4) {
 			message.getTextChannel().sendMessage(new EmbedBuilder()
 					.addField("Command", tafoBot.config.commandPrefix + "report <p1 character> <p2 character> <stage> <winner: p1/p2>", true)
