@@ -1,0 +1,11 @@
+{
+  "discord": {
+	"token": "",
+	"owner": ""
+  },
+  "mongoDB": {
+	"host": "localhost",
+	"port": 27017
+  },
+  "commandPrefix": "."
+}

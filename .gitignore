@@ -1,0 +1,5 @@
+.gradle/
+build/
+config/
+src/main/resources/tafobot.json
+.idea
