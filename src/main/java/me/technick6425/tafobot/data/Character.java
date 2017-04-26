@@ -70,4 +70,22 @@ public enum Character {
 		this.readable_name = readable_name;
 		this.aliases = aliases;
 	}
+
+	public static Character getById(int id) {
+		for(Character c : Character.values()) {
+			if(c.id == id) return c;
+		}
+
+		return null;
+	}
+
+	public static Character getByName(String name) {
+		for(Character c : Character.values()) {
+			for(String alias : c.aliases) {
+				if(name.equalsIgnoreCase(alias)) return c;
+			}
+		}
+
+		return null;
+	}
 }

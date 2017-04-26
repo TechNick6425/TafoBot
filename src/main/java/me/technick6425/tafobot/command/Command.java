@@ -9,9 +9,8 @@ import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.awt.Color;
+import java.util.*;
 
 public abstract class Command {
 	public abstract void execute(Message message, String... args);
@@ -135,6 +134,20 @@ public abstract class Command {
 		}
 
 		return builder.toString();
+	}
+
+	protected <K, V extends Comparable<? super V>> Map<K, V> sortByValue( Map<K, V> map ) {
+		List<Map.Entry<K, V>> list = new LinkedList<>(map.entrySet());
+
+		Collections.sort(list, Comparator.comparing(o -> (o.getValue())));
+
+		Map<K, V> result = new LinkedHashMap<>();
+		for(Map.Entry<K, V> entry : list)
+		{
+			result.put(entry.getKey(), entry.getValue());
+		}
+
+		return result;
 	}
 }
 

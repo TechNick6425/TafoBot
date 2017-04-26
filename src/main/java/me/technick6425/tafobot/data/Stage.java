@@ -17,4 +17,12 @@ public enum Stage {
 		this.readable_name = readable_name;
 		this.aliases = aliases;
 	}
+
+	public static Stage getById(int id) {
+		for(Stage s : Stage.values()) {
+			if(s.id == id) return s;
+		}
+
+		return null;
+	}
 }

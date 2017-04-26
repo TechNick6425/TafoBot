@@ -2,6 +2,7 @@ package me.technick6425.tafobot.command;
 
 import me.technick6425.tafobot.TafoBot;
 import me.technick6425.tafobot.data.Character;
+import me.technick6425.tafobot.data.Match;
 import me.technick6425.tafobot.data.Stage;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
@@ -108,7 +109,7 @@ public class CommandReport extends Command {
 		}
 
 		try {
-			tafoBot.mongoDBManager.RegisterMatch(p1, p2, stage, p1winner);
+			tafoBot.mongoDBManager.RegisterMatch(new Match(p1, p2, stage, p1winner));
 
 			message.getTextChannel().sendMessage(new EmbedBuilder()
 					.setTitle("Added!", null)

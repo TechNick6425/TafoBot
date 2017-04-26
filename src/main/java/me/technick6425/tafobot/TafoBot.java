@@ -1,7 +1,6 @@
 package me.technick6425.tafobot;
 
-import me.technick6425.tafobot.command.CommandReport;
-import me.technick6425.tafobot.command.CommandStats;
+import me.technick6425.tafobot.command.*;
 import me.technick6425.tafobot.config.Config;
 import me.technick6425.tafobot.listener.MessageListener;
 import me.technick6425.tafobot.manager.CommandManager;
@@ -41,6 +40,7 @@ public class TafoBot {
 
 		commandManager.registerCommand(new CommandStats(this), "stats");
 		commandManager.registerCommand(new CommandReport(this), "report", "match");
+		commandManager.registerCommand(new CommandCharacter(this), "character", "matchups");
 
 		try {
 			jda = new JDABuilder(AccountType.BOT)
