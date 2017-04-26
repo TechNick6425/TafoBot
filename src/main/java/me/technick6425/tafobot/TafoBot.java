@@ -9,6 +9,7 @@ import me.technick6425.tafobot.manager.MongoDBManager;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 
 import javax.security.auth.login.LoginException;
@@ -49,6 +50,8 @@ public class TafoBot {
 					.setAutoReconnect(true)
 					.addEventListener(new MessageListener(this))
 					.buildAsync();
+
+			jda.getPresence().setGame(Game.of("Number Crunching"));
 		} catch(LoginException | RateLimitedException e) {
 			e.printStackTrace();
 		}
