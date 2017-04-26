@@ -39,7 +39,6 @@ public class CommandCharacter extends Command {
 
 		List<Match> matchesList = tafoBot.mongoDBManager.GetMatches();
 		EmbedBuilder b = new EmbedBuilder();
-
 		b.setTitle(c.readable_name, null);
 
 		int won = 0;
@@ -74,7 +73,7 @@ public class CommandCharacter extends Command {
 		b.addField("Usage Rate", String.valueOf((float) used / matchesList.size()), true);
 
 		if(matchesList.size() < 500) {
-			b.addField("Matchups", "I don't have enough data to evaluate this. Please be patient while I gather more data.", false);
+			b.addField("Matchups/Stages", "I don't have enough data to evaluate these stats. Please be patient while I gather more data.", false);
 			message.getTextChannel().sendMessage(b.build()).queue();
 			return;
 		}
@@ -115,7 +114,7 @@ public class CommandCharacter extends Command {
 		b.addField("Worst Matchups",
 				chars.get(0).readable_name + " (" + matchups.get(chars.get(0)) + "%)\n" +
 						chars.get(1).readable_name + " (" + matchups.get(chars.get(1)) + "%)\n" +
-						chars.get(2).readable_name + " (" + matchups.get(chars.get(2)) + "%)\n", false);
+						chars.get(2).readable_name + " (" + matchups.get(chars.get(2)) + "%)\n", true);
 
 		message.getTextChannel().sendMessage(b.build()).queue();
 	}
