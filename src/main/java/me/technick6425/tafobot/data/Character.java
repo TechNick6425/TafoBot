@@ -45,7 +45,7 @@ public enum Character {
 	WIIFIT(40, "Wii Fit Trainer", "wiifit", "wiifittrainer", "wft"),
 	DRMARIO(41, "Dr. Mario", "drmario", "doctor", "cocktor", "toptier"),
 	DPIT(42, "Dark Pit", "dpit", "pittoo", "darkpit"),
-	LUCINA(43, "Lucian", "lucina", "lucian", "girlmarth"),
+	LUCINA(43, "Lucina", "lucina", "lucian", "girlmarth"),
 	SHULK(44, "Shulk", "shulk", "shulkle", "monadoboy", "monandoboy"),
 	PACMAN(45, "Pac-Man", "pacman", "pac"),
 	MEGAMAN(46, "Mega Man", "megaman", "jumpnshoot"),

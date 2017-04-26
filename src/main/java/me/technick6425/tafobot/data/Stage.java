@@ -25,4 +25,14 @@ public enum Stage {
 
 		return null;
 	}
+
+	public static Stage getByName(String name) {
+		for(Stage s : Stage.values()) {
+			for(String alias : s.aliases) {
+				if(name.equalsIgnoreCase(alias)) return s;
+			}
+		}
+
+		return null;
+	}
 }
