@@ -28,7 +28,7 @@ public class MongoDBManager {
 
 	public void reload() {
 		mongoClient = new MongoClient(tafoBot.config.mongoDB.host, tafoBot.config.mongoDB.port);
-		mongoDatabase = mongoClient.getDatabase("tafobot");
+		mongoDatabase = mongoClient.getDatabase(tafoBot.config.mongoDB.database);
 	}
 
 	public void RegisterMatch(Match match) {

@@ -9,6 +9,7 @@ public class Config {
 	public class MongoDB {
 		public String host;
 		public int port;
+		public String database;
 	}
 
 	public Discord discord;
