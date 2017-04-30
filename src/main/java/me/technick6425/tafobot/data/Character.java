@@ -2,7 +2,7 @@ package me.technick6425.tafobot.data;
 
 public enum Character {
 
-	MARIO(0, "Mario", "mario"),
+	MARIO(0, "Mario", "mario", "actuallystupid),
 	LUIGI(1, "Luigi", "luigi"),
 	PEACH(2, "Peach", "peach"),
 	BOWSER(3, "Bowser", "bowser"),
