@@ -6,7 +6,7 @@ import me.technick6425.tafobot.data.Match;
 import me.technick6425.tafobot.data.Stage;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
-import net.noxal.common.util.DateUtils;
+import me.technick6425.tafobot.util.DateUtils;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -65,7 +65,7 @@ public class CommandCharacter extends Command {
 		}
 
 		if(used < 100) {
-			b.setDescription("I don't have enough data to get accurate statistics. Please be patient while I gather more data.");
+			b.setDescription("I don't have enough data to get accurate statistics (" + used + "/100). Please be patient while I gather more data.");
 			message.getTextChannel().sendMessage(b.build()).queue();
 			return;
 		}
@@ -74,7 +74,7 @@ public class CommandCharacter extends Command {
 		b.addField("Usage Rate", String.valueOf((float) used / matchesList.size()), true);
 
 		if(used < 500) {
-			b.addField("Matchups/Stages", "I don't have enough data to evaluate these stats. Please be patient while I gather more data.", false);
+			b.addField("Matchups/Stages", "I don't have enough data to evaluate these stats (" + used + "/500). Please be patient while I gather more data.", false);
 			message.getTextChannel().sendMessage(b.build()).queue();
 			return;
 		}
