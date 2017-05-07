@@ -7,6 +7,7 @@ import me.technick6425.tafobot.data.Stage;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
+import org.bson.Document;
 
 import java.awt.*;
 
@@ -112,11 +113,12 @@ public class CommandReport extends Command {
 		}
 
 		try {
-			tafoBot.mongoDBManager.RegisterMatch(new Match(p1, p2, stage, p1winner));
+			String id = tafoBot.mongoDBManager.RegisterMatch(new Match(p1, p2, stage, p1winner));
 
 			message.getTextChannel().sendMessage(new EmbedBuilder()
 					.setTitle("Added!", null)
-					.addField("P1 Character", p1.readable_name, true)
+					.addField("Match ID", id, true)
+					.addField("P1 Character", p1.readable_name, false)
 					.addField("P2 Character", p2.readable_name, true)
 					.addField("Stage", stage.readable_name, false)
 					.addField("Winner", (p1winner ? "P1" : "P2"), true)
