@@ -44,6 +44,8 @@ public class TafoBot {
 		commandManager.registerCommand(new CommandCharacter(this), "character", "matchups");
 		commandManager.registerCommand(new CommandStage(this), "stage");
 		commandManager.registerCommand(new CommandRemove(this), "remove");
+		commandManager.registerCommand(new CommandAddServer(this), "addserver");
+		commandManager.registerCommand(new CommandRemoveServer(this), "removeserver");
 
 		try {
 			jda = new JDABuilder(AccountType.BOT)

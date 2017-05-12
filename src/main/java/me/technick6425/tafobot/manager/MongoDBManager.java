@@ -11,6 +11,7 @@ import me.technick6425.tafobot.TafoBot;
 import me.technick6425.tafobot.data.Character;
 import me.technick6425.tafobot.data.Match;
 import me.technick6425.tafobot.data.Stage;
+import net.dv8tion.jda.core.entities.Guild;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -64,5 +65,30 @@ public class MongoDBManager {
 		if(res.getDeletedCount() == 0 || !res.wasAcknowledged()) return false;
 
 		return true;
+	}
+
+	public void RegisterGuild(Guild g) {
+		MongoCollection<Document> collection = mongoDatabase.getCollection("allowed_guilds");
+		collection.insertOne(new Document("guild_id", g.getId()));
+	}
+
+	public boolean RemoveGuild(Guild g) {
+		MongoCollection<Document> collection = mongoDatabase.getCollection("allowed_guilds");
+
+		BasicDBObject d = new BasicDBObject();
+		d.put("guild_id", g.getId());
+
+		DeleteResult res = collection.deleteMany(d);
+		if(res.getDeletedCount() == 0 || !res.wasAcknowledged()) return false;
+
+		return true;
+	}
+
+	public boolean IsGuildAllowed(Guild g) {
+		MongoCollection<Document> collection = mongoDatabase.getCollection("allowed_guilds");
+		BasicDBObject d = new BasicDBObject();
+		d.put("guild_id", g.getId());
+
+		return collection.find(d).first() != null;
 	}
 }

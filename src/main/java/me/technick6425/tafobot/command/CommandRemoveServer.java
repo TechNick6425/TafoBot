@@ -6,46 +6,38 @@ import net.dv8tion.jda.core.entities.Message;
 
 import java.awt.*;
 
-public class CommandRemove extends Command {
+public class CommandRemoveServer extends Command {
 	private TafoBot tafoBot;
 
-	public CommandRemove(TafoBot tafoBot) {
+	public CommandRemoveServer(TafoBot tafoBot) {
 		this.tafoBot = tafoBot;
 	}
 
 	@Override
 	public void execute(Message message, String... args) {
+		if(!assertOwner(message)) return;
+
 		if(!tafoBot.mongoDBManager.IsGuildAllowed(message.getGuild())) {
 			message.getTextChannel().sendMessage(new EmbedBuilder()
 					.setTitle("Error", null)
 					.setColor(Color.RED)
-					.setDescription("This server is not on the approved servers list.")
+					.setDescription("This server isn't approved.")
 					.build()).queue();
 			return;
 		}
 
-		if(args.length != 1) {
+		if(tafoBot.mongoDBManager.RemoveGuild(message.getGuild())) {
 			message.getTextChannel().sendMessage(new EmbedBuilder()
-					.setTitle("Error!", null)
-					.setDescription("You didn't include a match ID!")
-					.setColor(Color.RED)
-					.build()).queue();
-			return;
-		}
-
-		if(tafoBot.mongoDBManager.RemoveMatch(args[0])) {
-			message.getTextChannel().sendMessage(new EmbedBuilder()
-					.setTitle("Success", null)
-					.setDescription("Match removed!")
+					.setTitle("Removed!", null)
 					.setColor(Color.GREEN)
+					.setDescription("This server has been removed from the list of approved servers.")
 					.build()).queue();
-			return;
+		} else {
+			message.getTextChannel().sendMessage(new EmbedBuilder()
+					.setTitle("Error", null)
+					.setColor(Color.GREEN)
+					.setDescription("There was an error removing the server.")
+					.build()).queue();
 		}
-
-		message.getTextChannel().sendMessage(new EmbedBuilder()
-				.setTitle("Error!", null)
-				.setDescription("That is not a valid match ID!")
-				.build()).queue();
-		return;
 	}
 }

@@ -7,7 +7,6 @@ import me.technick6425.tafobot.data.Stage;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
-import org.bson.Document;
 
 import java.awt.*;
 
@@ -20,6 +19,14 @@ public class CommandReport extends Command {
 
 	@Override
 	public void execute(Message message, String... args) {
+		if(!tafoBot.mongoDBManager.IsGuildAllowed(message.getGuild())) {
+			message.getTextChannel().sendMessage(new EmbedBuilder()
+					.setTitle("Error", null)
+					.setColor(Color.RED)
+					.setDescription("This server is not on the approved servers list.")
+					.build()).queue();
+			return;
+		}
 		checkUserPermission(message, Permission.MESSAGE_MANAGE);
 
 		if(args.length != 4) {

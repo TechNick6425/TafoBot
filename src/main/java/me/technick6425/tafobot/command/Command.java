@@ -149,5 +149,18 @@ public abstract class Command {
 
 		return result;
 	}
+
+	protected boolean assertOwner(Message message) {
+		if(!message.getAuthor().getId().equals(TafoBot.instance.config.discord.owner)) {
+			message.getTextChannel().sendMessage(new EmbedBuilder()
+					.setTitle("Error", null)
+					.setColor(Color.RED)
+					.setDescription("You don't have permission to do that.")
+					.build()).queue();
+			return false;
+		}
+
+		return true;
+	}
 }
 
