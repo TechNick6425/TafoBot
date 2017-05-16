@@ -15,4 +15,6 @@ public class Config {
 	public Discord discord;
 	public MongoDB mongoDB;
 	public String commandPrefix;
+	public int startingEloScore;
+	public int eloK;
 }

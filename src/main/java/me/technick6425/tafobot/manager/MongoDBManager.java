@@ -4,20 +4,22 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Aggregates;
-import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.UpdateResult;
 import me.technick6425.tafobot.TafoBot;
 import me.technick6425.tafobot.data.Character;
 import me.technick6425.tafobot.data.Match;
+import me.technick6425.tafobot.data.Player;
 import me.technick6425.tafobot.data.Stage;
 import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Member;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import static com.mongodb.client.model.Filters.*;
 
 public class MongoDBManager {
 	private TafoBot tafoBot;
@@ -90,5 +92,58 @@ public class MongoDBManager {
 		d.put("guild_id", g.getId());
 
 		return collection.find(d).first() != null;
+	}
+
+	public Player CreateNewPlayer(Member member) {
+		System.out.println("Creating player for " + member.getEffectiveName() + " on " + member.getGuild().getName());
+
+		Player p = new Player(member);
+		Document d = new Document("guild_id", member.getGuild().getId()).append("user_id", member.getUser().getId()).append("elo", p.eloScore);
+
+		MongoCollection<Document> collection = mongoDatabase.getCollection("players");
+		collection.insertOne(d);
+
+		return p;
+	}
+
+	public Player FindPlayer(Member member) {
+		MongoCollection<Document> collection = mongoDatabase.getCollection("players");
+
+		BasicDBObject d = new BasicDBObject();
+		d.put("guild_id", member.getGuild().getId());
+		d.put("user_id", member.getUser().getId());
+
+		ArrayList<Document> documents = new ArrayList<>();
+		collection.find(d).into(documents);
+
+		if(documents.size() > 0) {
+			Document doc = documents.get(0);
+			return new Player(member, doc.getInteger("elo"));
+		} else {
+			return null;
+		}
+	}
+
+	public void UpdatePlayer(Player player) {
+		MongoCollection<Document> collection = mongoDatabase.getCollection("players");
+		UpdateResult res = collection.updateOne(and(eq("guild_id", player.member.getGuild().getId()), eq("user_id", player.member.getUser().getId())), new Document("$set", new Document("elo", player.eloScore)));
+		if(res.getModifiedCount() != 1 || !res.wasAcknowledged()) throw new RuntimeException("Could not update player." + (res.getModifiedCount() != 1 ? " Didn't modify any records." : " Request was not acknowledged."));
+	}
+
+	public List<Player> GetAllPlayers(Guild guild) {
+		MongoCollection<Document> collection = mongoDatabase.getCollection("players");
+
+		BasicDBObject filter = new BasicDBObject();
+		filter.put("guild_id", guild.getId());
+
+		ArrayList<Document> documents = new ArrayList<>();
+		collection.find(filter).into(documents);
+
+		ArrayList<Player> players = new ArrayList<>();
+		for(Document d : documents) {
+			players.add(new Player(guild.getMemberById(d.getString("user_id")), d.getInteger("elo")));
+		}
+
+		return players;
 	}
 }

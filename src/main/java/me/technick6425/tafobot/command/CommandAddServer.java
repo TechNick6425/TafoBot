@@ -15,7 +15,7 @@ public class CommandAddServer extends Command {
 
 	@Override
 	public void execute(Message message, String... args) {
-		if(!assertOwner(message)) return;
+		assertOwner(message);
 
 		if(tafoBot.mongoDBManager.IsGuildAllowed(message.getGuild())) {
 			message.getTextChannel().sendMessage(new EmbedBuilder()
