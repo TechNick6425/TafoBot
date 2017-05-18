@@ -57,15 +57,15 @@ public class CommandStage extends Command {
 		}
 
 		DecimalFormat df = new DecimalFormat("###.##");
-		b.addField("Usage Rate", String.valueOf(df.format((float) used / matchesList.size() * 100)), true);
+		b.addField("Usage Rate", String.valueOf(df.format((double) used / matchesList.size() * 100)), true);
 
 		if(used < 500) {
-			b.addField("Matchups/Stages", "I don't have enough data to evaluate these stats (" + used + "/500). Please be patient while I gather more data.", false);
+			b.addField("Characters", "I don't have enough data to evaluate these stats (" + used + "/500). Please be patient while I gather more data.", false);
 			message.getTextChannel().sendMessage(b.build()).queue();
 			return;
 		}
 
-		Map<Character,Float> winRates = new HashMap<>();
+		Map<Character,Double> winRates = new HashMap<>();
 
 		for(Character ch : Character.values()) {
 			int mwon = 0;
@@ -87,21 +87,21 @@ public class CommandStage extends Command {
 				}
 			}
 
-			winRates.put(ch, (float) mwon / (mwon + mlose));
+			winRates.put(ch, (double) mwon / (mwon + mlose));
 		}
 
 		winRates = sortByValue(winRates);
 		List<Character> chars = (List<Character>) winRates.keySet();
 
 		b.addField("Best For",
-				chars.get(chars.size() - 1).readable_name + " (" + winRates.get(chars.get(chars.size() - 1)) + "%)\n" +
-						chars.get(chars.size() - 2).readable_name + " (" + winRates.get(chars.get(chars.size() - 2)) + "%\n" +
-						chars.get(chars.size() - 3).readable_name + " (" + winRates.get(chars.get(chars.size() - 3)) + "%)", false);
+				chars.get(chars.size() - 1).readable_name + " (" + df.format(winRates.get(chars.get(chars.size() - 1)) * 100) + "%)\n" +
+						chars.get(chars.size() - 2).readable_name + " (" + df.format(winRates.get(chars.get(chars.size() - 2)) * 100) + "%\n" +
+						chars.get(chars.size() - 3).readable_name + " (" + df.format(winRates.get(chars.get(chars.size() - 3)) * 100) + "%)", false);
 
 		b.addField("Worst For",
-				chars.get(0).readable_name + " (" + winRates.get(chars.get(0)) + "%)\n" +
-						chars.get(1).readable_name + " (" + winRates.get(chars.get(1)) + "%)\n" +
-						chars.get(2).readable_name + " (" + winRates.get(chars.get(2)) + "%)\n", true);
+				chars.get(0).readable_name + " (" + df.format(winRates.get(chars.get(0)) * 100) + "%)\n" +
+						chars.get(1).readable_name + " (" + df.format(winRates.get(chars.get(1)) * 100) + "%)\n" +
+						chars.get(2).readable_name + " (" + df.format(winRates.get(chars.get(2)) * 100) + "%)\n", true);
 
 		message.getTextChannel().sendMessage(b.build()).queue();
 	}
