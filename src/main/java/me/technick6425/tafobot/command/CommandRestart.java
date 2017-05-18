@@ -18,6 +18,7 @@ public class CommandRestart extends Command {
 		try {
 			Runtime.getRuntime().exec("./gradlew run");
 			message.getTextChannel().sendMessage("Restarting...").queue((x) -> {
+				tafoBot.getJda().shutdown();
 				System.exit(0);
 			});
 		} catch (IOException e) {
