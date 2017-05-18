@@ -57,7 +57,7 @@ public class CommandStage extends Command {
 		}
 
 		DecimalFormat df = new DecimalFormat("###.##");
-		b.addField("Usage Rate", String.valueOf(df.format((double) used / matchesList.size() * 100)), true);
+		b.addField("Usage Rate", String.valueOf(df.format((double) used / matchesList.size() * 100)) + "%", true);
 
 		if(used < 500) {
 			b.addField("Characters", "I don't have enough data to evaluate these stats (" + used + "/500). Please be patient while I gather more data.", false);

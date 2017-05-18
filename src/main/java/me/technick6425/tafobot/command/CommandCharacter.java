@@ -72,8 +72,8 @@ public class CommandCharacter extends Command {
 		}
 
 		DecimalFormat df = new DecimalFormat("###.##");
-		b.addField("Win Rate", String.valueOf(df.format((double) won / (won + lose) * 100)), false);
-		b.addField("Usage Rate", String.valueOf(df.format((double) used / matchesList.size() * 100)), true);
+		b.addField("Win Rate", String.valueOf(df.format((double) won / (won + lose) * 100)) + "%", false);
+		b.addField("Usage Rate", String.valueOf(df.format((double) used / matchesList.size() * 100)) + "%", true);
 
 		if(used < 500) {
 			b.addField("Matchups/Stages", "I don't have enough data to evaluate these stats (" + used + "/500). Please be patient while I gather more data.", false);
