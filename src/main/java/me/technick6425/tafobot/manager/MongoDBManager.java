@@ -7,12 +7,11 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
 import me.technick6425.tafobot.TafoBot;
+import me.technick6425.tafobot.data.*;
 import me.technick6425.tafobot.data.Character;
-import me.technick6425.tafobot.data.Match;
-import me.technick6425.tafobot.data.Player;
-import me.technick6425.tafobot.data.Stage;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.core.entities.User;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -145,5 +144,23 @@ public class MongoDBManager {
 		}
 
 		return players;
+	}
+
+	public void RegisterSet(Set s) {
+		MongoCollection<Document> collection = mongoDatabase.getCollection("sets");
+		collection.insertOne(new Document("winner", s.winner.getId()).append("loser", s.loser.getId()));
+	}
+
+	public List<Set> GetAllSets() {
+		MongoCollection<Document> collection = mongoDatabase.getCollection("sets");
+
+		ArrayList<Document> documents = new ArrayList<>();
+		collection.find().into(documents);
+
+		ArrayList<Set> sets = new ArrayList<>();
+		for (Document d: documents) {
+			sets.add(new Set(tafoBot.getJda().getUserById(d.getString("winner")), tafoBot.getJda().getUserById(d.getString("loser"))));
+		}
+		return sets;
 	}
 }

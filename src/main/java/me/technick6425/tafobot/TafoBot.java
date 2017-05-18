@@ -51,6 +51,7 @@ public class TafoBot {
 		commandManager.registerCommand(new CommandRestart(this), "restart");
 		commandManager.registerCommand(new CommandScore(this), "score", "rank");
 		commandManager.registerCommand(new CommandRankings(this), "rankings", "server");
+		commandManager.registerCommand(new CommandSetCount(this), "setcount");
 
 		try {
 			jda = new JDABuilder(AccountType.BOT)

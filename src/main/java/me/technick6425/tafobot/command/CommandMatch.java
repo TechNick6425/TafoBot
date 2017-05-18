@@ -2,6 +2,7 @@ package me.technick6425.tafobot.command;
 
 import me.technick6425.tafobot.TafoBot;
 import me.technick6425.tafobot.data.Player;
+import me.technick6425.tafobot.data.Set;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
@@ -62,6 +63,8 @@ public class CommandMatch extends Command {
 
 		tafoBot.mongoDBManager.UpdatePlayer(winner);
 		tafoBot.mongoDBManager.UpdatePlayer(loser);
+
+		tafoBot.mongoDBManager.RegisterSet(new Set(userList.get(0), userList.get(1)));
 
 		message.getTextChannel().sendMessage(new EmbedBuilder()
 				.setTitle("Added!", null)

@@ -21,7 +21,7 @@ public class CommandUpdate extends Command {
 			Runtime.getRuntime().exec("git pull");
 
 			message.getTextChannel().sendMessage(new EmbedBuilder()
-					.setColor(Color.RED)
+					.setColor(Color.GREEN)
 					.setTitle("Success", null)
 					.setDescription("Bot updated to latest git version. Restart with `.restart`")
 					.build()).queue();
