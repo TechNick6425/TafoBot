@@ -8,6 +8,7 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Message;
 
 import java.awt.Color;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class CommandCharacter extends Command {
@@ -70,8 +71,9 @@ public class CommandCharacter extends Command {
 			return;
 		}
 
-		b.addField("Win Rate", String.valueOf((float) won / (won + lose)), false);
-		b.addField("Usage Rate", String.valueOf((float) used / matchesList.size()), true);
+		DecimalFormat df = new DecimalFormat("###.##");
+		b.addField("Win Rate", String.valueOf(df.format((float) won / (won + lose) * 100)), false);
+		b.addField("Usage Rate", String.valueOf(df.format((float) used / matchesList.size() * 100)), true);
 
 		if(used < 500) {
 			b.addField("Matchups/Stages", "I don't have enough data to evaluate these stats (" + used + "/500). Please be patient while I gather more data.", false);
