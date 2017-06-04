@@ -13,6 +13,10 @@ import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 
 import javax.security.auth.login.LoginException;
+import java.io.BufferedOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.Date;
 
 public class TafoBot {
@@ -32,13 +36,23 @@ public class TafoBot {
 		instance = this;
 
 		configManager = new JSONConfigManager(this, "tafobot.json", "config", Config.class);
-		commandManager = new CommandManager(this);
 
 		configManager.reloadConfig();
 		config = (Config) configManager.getConfig();
 
+		if(!config.logFile.equals("")) {
+			try {
+				System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream(config.logFile)), true));
+				System.setErr(new PrintStream(new BufferedOutputStream(new FileOutputStream(config.logFile)), true));
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.exit(1);
+			}
+		}
+
 		mongoDBManager = new MongoDBManager(this);
 
+		commandManager = new CommandManager(this);
 		commandManager.registerCommand(new CommandStats(this), "stats");
 		commandManager.registerCommand(new CommandReport(this), "report", "match");
 		commandManager.registerCommand(new CommandCharacter(this), "character", "matchups");
@@ -52,6 +66,7 @@ public class TafoBot {
 		commandManager.registerCommand(new CommandScore(this), "score", "rank");
 		commandManager.registerCommand(new CommandRankings(this), "rankings", "server");
 		commandManager.registerCommand(new CommandSetCount(this), "setcount");
+		commandManager.registerCommand(new CommandProgress(this), "progress");
 
 		try {
 			jda = new JDABuilder(AccountType.BOT)

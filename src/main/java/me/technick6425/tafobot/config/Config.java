@@ -17,4 +17,5 @@ public class Config {
 	public String commandPrefix;
 	public int startingEloScore;
 	public int eloK;
+	public String logFile;
 }

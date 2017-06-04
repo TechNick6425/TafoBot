@@ -1,4 +1,4 @@
-group 'me.technick.6425'
+group 'me.technick6425'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
