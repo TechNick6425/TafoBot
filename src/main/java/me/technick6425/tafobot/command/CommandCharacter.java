@@ -20,13 +20,19 @@ public class CommandCharacter extends Command {
 
 	@Override
 	public void execute(Message message, String... args) {
-		if(args.length != 1) {
+		if(args.length < 1) {
 			message.getTextChannel().sendMessage(new EmbedBuilder()
 					.setTitle("Error!", null)
 					.setDescription("You did not include a character name, or included too many arguments.")
 					.setColor(Color.RED)
 					.build()).queue();
 			return;
+		}
+
+		boolean override = false;
+		if(args.length == 2 && args[1].equals("override")) {
+			assertOwner(message);
+			override = true;
 		}
 
 		Character c;
@@ -65,7 +71,7 @@ public class CommandCharacter extends Command {
 			}
 		}
 
-		if(used < 100) {
+		if(used < 100 || override) {
 			b.setDescription("I don't have enough data to get accurate statistics (" + used + "/100). Please be patient while I gather more data.");
 			message.getTextChannel().sendMessage(b.build()).queue();
 			return;
@@ -75,7 +81,7 @@ public class CommandCharacter extends Command {
 		b.addField("Win Rate", String.valueOf(df.format((double) won / (won + lose) * 100)) + "%", false);
 		b.addField("Usage Rate", String.valueOf(df.format((double) used / matchesList.size() * 100)) + "%", true);
 
-		if(used < 500) {
+		if(used < 500 || override) {
 			b.addField("Matchups/Stages", "I don't have enough data to evaluate these stats (" + used + "/500). Please be patient while I gather more data.", false);
 			message.getTextChannel().sendMessage(b.build()).queue();
 			return;
