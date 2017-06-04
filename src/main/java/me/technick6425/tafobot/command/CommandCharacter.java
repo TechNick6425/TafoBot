@@ -47,7 +47,7 @@ public class CommandCharacter extends Command {
 
 		List<Match> matchesList = tafoBot.mongoDBManager.GetMatches();
 		EmbedBuilder b = new EmbedBuilder();
-		b.setTitle(c.readable_name, null);
+		b.setTitle(c.readable_name + (override ? " (Override)" : ""), null);
 
 		int won = 0;
 		int lose = 0;
@@ -71,7 +71,7 @@ public class CommandCharacter extends Command {
 			}
 		}
 
-		if(used < 100 || override) {
+		if(used < 100 && !override) {
 			b.setDescription("I don't have enough data to get accurate statistics (" + used + "/100). Please be patient while I gather more data.");
 			message.getTextChannel().sendMessage(b.build()).queue();
 			return;
@@ -81,7 +81,7 @@ public class CommandCharacter extends Command {
 		b.addField("Win Rate", String.valueOf(df.format((double) won / (won + lose) * 100)) + "%", false);
 		b.addField("Usage Rate", String.valueOf(df.format((double) used / matchesList.size() * 100)) + "%", true);
 
-		if(used < 500 || override) {
+		if(used < 500) {
 			b.addField("Matchups/Stages", "I don't have enough data to evaluate these stats (" + used + "/500). Please be patient while I gather more data.", false);
 			message.getTextChannel().sendMessage(b.build()).queue();
 			return;
