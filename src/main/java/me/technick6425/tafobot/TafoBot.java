@@ -6,6 +6,7 @@ import me.technick6425.tafobot.listener.MessageListener;
 import me.technick6425.tafobot.manager.CommandManager;
 import me.technick6425.tafobot.manager.JSONConfigManager;
 import me.technick6425.tafobot.manager.MongoDBManager;
+import me.technick6425.tafobot.service.LogService;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
@@ -28,6 +29,8 @@ public class TafoBot {
 	public MongoDBManager mongoDBManager;
 	public CommandManager commandManager;
 	private JDA jda;
+
+	public LogService logService;
 
 	public final long startTime = new Date().getTime();
 	public int messagesReceived = 0;
@@ -67,6 +70,9 @@ public class TafoBot {
 		commandManager.registerCommand(new CommandRankings(this), "rankings", "server");
 		commandManager.registerCommand(new CommandSetCount(this), "setcount");
 		commandManager.registerCommand(new CommandProgress(this), "progress");
+		commandManager.registerCommand(new CommandLog(this), "log");
+
+		logService = new LogService();
 
 		try {
 			jda = new JDABuilder(AccountType.BOT)

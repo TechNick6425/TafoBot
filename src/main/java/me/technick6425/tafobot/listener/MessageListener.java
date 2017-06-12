@@ -15,6 +15,9 @@ public class MessageListener extends ListenerAdapter {
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event) {
 		if(event.getChannel().getType() != ChannelType.TEXT) return;
+
+		tafoBot.logService.onMessage(event.getMessage());
+
 		if(event.getAuthor().isBot()) return;
 
 		if(event.getMessage().getContent().startsWith(tafoBot.config.commandPrefix)) {
