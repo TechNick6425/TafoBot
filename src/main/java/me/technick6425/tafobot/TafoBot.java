@@ -71,6 +71,8 @@ public class TafoBot {
 		commandManager.registerCommand(new CommandProgress(this), "progress");
 		commandManager.registerCommand(new CommandLog(this), "log");
 		commandManager.registerCommand(new CommandChannels(this), "channels");
+		commandManager.registerCommand(new CommandGame(this), "game");
+		commandManager.registerCommand(new CommandStream(this), "stream");
 
 		logService = new LogService();
 
