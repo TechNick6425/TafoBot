@@ -1,5 +1,6 @@
-package me.technick6425.tafobot;
+package me.technick6425.tafobot.command;
 
+import me.technick6425.tafobot.TafoBot;
 import me.technick6425.tafobot.command.Command;
 import me.technick6425.tafobot.data.Character;
 import me.technick6425.tafobot.data.Match;

@@ -1,7 +1,6 @@
 package me.technick6425.tafobot.command;
 
 import me.technick6425.tafobot.TafoBot;
-import me.technick6425.tafobot.service.LogService;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
@@ -17,6 +16,7 @@ public class CommandLog extends Command {
 
 	@Override
 	public void execute(Message message, String... args) {
+		assertOwner(message, true);
 		if(args.length != 2) {
 			message.getTextChannel().sendMessage("`" + tafoBot.config.commandPrefix + "log <guild id> <channel name>`").queue();
 			return;

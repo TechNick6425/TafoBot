@@ -15,7 +15,6 @@ import net.dv8tion.jda.core.exceptions.RateLimitedException;
 
 import javax.security.auth.login.LoginException;
 import java.io.BufferedOutputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.Date;
@@ -71,6 +70,7 @@ public class TafoBot {
 		commandManager.registerCommand(new CommandSetCount(this), "setcount");
 		commandManager.registerCommand(new CommandProgress(this), "progress");
 		commandManager.registerCommand(new CommandLog(this), "log");
+		commandManager.registerCommand(new CommandChannels(this), "channels");
 
 		logService = new LogService();
 

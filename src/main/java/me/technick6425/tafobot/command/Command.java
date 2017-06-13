@@ -151,8 +151,12 @@ public abstract class Command {
 	}
 
 	protected void assertOwner(Message message) {
+		assertOwner(message, false);
+	}
+
+	protected void assertOwner(Message message, boolean silent) {
 		if (!message.getAuthor().getId().equals(TafoBot.instance.config.discord.owner)) {
-			sendFailureMessage(message, "You don't have permission for that (Bot Owner)");
+			if(!silent) sendFailureMessage(message, "You don't have permission for that (Bot Owner)");
 			throw new UserPermissionException(Permission.UNKNOWN, message.getGuild());
 		}
 	}
