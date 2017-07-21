@@ -22,7 +22,7 @@ public class CommandStats extends Command {
 	public void execute(Message message, String... args) {
 		Runtime runtime = Runtime.getRuntime();
 
-		EmbedBuilder embed = new EmbedBuilder().setTitle("Stats - TafoBot v3.0a", null).setColor(Color.GREEN);
+		EmbedBuilder embed = new EmbedBuilder().setTitle("Stats - TafoBot v3.0b", null).setColor(Color.GREEN);
 
 		ArrayList<Character> chars = new ArrayList<Character>();
 		ArrayList<Stage> stages = new ArrayList<Stage>();

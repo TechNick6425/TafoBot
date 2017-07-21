@@ -60,7 +60,7 @@ public enum Character {
 	CLOUD(55, "Cloud", "cloud", "limit", "ffvii", "adventchildren"),
 	CORRIN(56, "Corrin", "corrin", "fates"),
 	BAYO(57, "Bayonetta", "bayonetta", "bayo"),
-	MIIBRAWLERCUSTOM(58, "Gunner (Custom)", "bralwercustom", "lightningcustom"),
+	MIIBRAWLERCUSTOM(58, "Brawler (Custom)", "bralwercustom", "lightningcustom"),
 	MIISWORDFIGHTERCUSTOM(59, "Swordfighter (Custom)", "swordfightercustom"),
 	MIIGUNNERCUSTOM(60, "Gunner (Custom)", "gunnercustom", "shootycustom");
 
