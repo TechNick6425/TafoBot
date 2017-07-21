@@ -6,7 +6,7 @@ public enum Stage {
 	FINALDESTINATION(2, "Final Destination", "finaldestination", "fd"),
 	DREAMLAND(3, "Dreamland 64", "dreamland", "dl", "dl64", "banned"),
 	LYLAT(4, "Lylat Cruise", "lylat", "lylatcruise", "pineapple"),
-	TOWNANDCITY(5, "Town & City", "t&c", "towncity", "tac", "townandcity", "town&city");
+	TOWNANDCITY(5, "Town & City", "t&c", "towncity", "tac", "townandcity", "town&city", "tnc");
 
 	public int id;
 	public String readable_name;

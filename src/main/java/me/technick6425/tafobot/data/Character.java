@@ -11,7 +11,7 @@ public enum Character {
 	BOWSERJR(6, "Bowser Jr.", "bowserjr"),
 	WARIO(7, "Wario", "wario", "wah"),
 	GAMEANDWATCH(8, "Game & Watch", "gamenwatch", "gameandwatch", "gnw", "g&w"),
-	DONKEYKONG(9, "Donkey Kong", "donkeykong", "donkey"),
+	DONKEYKONG(9, "Donkey Kong", "donkeykong", "donkey", "dk"),
 	DIDDYKONG(10, "Diddy Kong", "diddykong", "diddy", "bananas"),
 	LINK(11, "Link", "link", "lonk"),
 	ZELDA(12, "Zelda", "zelda"),
@@ -59,7 +59,10 @@ public enum Character {
 	RYU(54, "Ryu", "ryu", "fadc", "sf"),
 	CLOUD(55, "Cloud", "cloud", "limit", "ffvii", "adventchildren"),
 	CORRIN(56, "Corrin", "corrin", "fates"),
-	BAYO(57, "Bayonetta", "bayonetta", "bayo");
+	BAYO(57, "Bayonetta", "bayonetta", "bayo"),
+	MIIBRAWLERCUSTOM(58, "Gunner (Custom)", "bralwercustom", "lightningcustom"),
+	MIISWORDFIGHTERCUSTOM(59, "Swordfighter (Custom)", "swordfightercustom"),
+	MIIGUNNERCUSTOM(60, "Gunner (Custom)", "gunnercustom", "shootycustom");
 
 	public int id;
 	public String readable_name;
